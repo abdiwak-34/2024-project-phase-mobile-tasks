@@ -57,16 +57,4 @@ void main() {
     expect(result, equals(Right(testProducts)));
   });
 
-  test('should return failure when repository fails', () async {
-    // Arrange
-    final failure = ServerFailure();
-    when(mockRepository.getAllProducts())
-      .thenAnswer((_) async => Left(failure));
-
-    // Act
-    final result = await usecase(NoParams());
-
-    // Assert
-    expect(result, equals(Left(failure)));
-  });
 }

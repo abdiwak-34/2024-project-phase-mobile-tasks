@@ -5,17 +5,13 @@ import '../../../../core/usecases/usecase.dart';
 import '../entities/product.dart';
 import '../repositories/product_repository.dart';
 
-class DeleteProductUsecase implements UseCase<Product, Product> {
+class DeleteProductUsecase implements UseCase<Unit, DeleteProductParams> {
   final ProductRepository repository;
 
   DeleteProductUsecase(this.repository);
 
   @override
-  Future<Either<Failure, Product>> call(Product product) async {
-    final result = await repository.deleteProduct(product.id);
-    return result.fold(
-      (failure) => Left(failure),
-      (_) => Right(product),
-    );
+  Future<Either<Failure, Unit>> call(DeleteProductParams params) async {
+    return await repository.deleteProduct(params.productId);
   }
 }
