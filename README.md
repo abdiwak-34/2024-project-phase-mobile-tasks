@@ -5,29 +5,7 @@ A modular, testable **Ecommerce App** built using **Clean Architecture** princip
 ---
 
 ## 📁 Project Structure
-
-ecommerce_app/
-├── lib/
-│ ├── core/ # Common utilities and error handling
-│ ├── features/
-│ │ └── product/
-│ │ ├── domain/
-│ │ │ ├── entities/
-│ │ │ ├── repositories/
-│ │ │ └── usecases/
-│ │ ├── data/
-│ │ │ ├── models/
-│ │ │ └── repositories_impl/
-│ │ └── presentation/ # (optional UI)
-│ └── main.dart
-└── test/
-└── product/
-└── domain/
-└── usecases/
-
-
 ---
-
 ## 🧱 Architecture Overview
 
 The app is based on the **Clean Architecture** pattern:
