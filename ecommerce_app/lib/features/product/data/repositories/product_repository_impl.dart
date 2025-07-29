@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/platform/network_info.dart';
 import '../../domain/entities/product.dart';
@@ -40,7 +41,7 @@ class ProductRepositoryImpl implements ProductRepository{
       try {
         final remoteProduct = await productRemoteDatasource.updateProduct(product);
         return Right(remoteProduct);
-      } catch (e) {
+      } on ServerExceptions {
         return const Left(ServerFailure('server error'));
       }
     } else {
@@ -55,7 +56,7 @@ class ProductRepositoryImpl implements ProductRepository{
       try {
         await productRemoteDatasource.deleteProduct(id);
         return const Right(unit);
-      } catch (e) {
+      } on ServerExceptions {
         return const Left(ServerFailure('server error'));
       }
     } else {
@@ -70,14 +71,14 @@ class ProductRepositoryImpl implements ProductRepository{
       try {
         final remoteProducts = await productRemoteDatasource.getAllProducts();
         return Right(remoteProducts);
-      } catch (e) {
+      } on ServerExceptions {
         return const Left(ServerFailure('server error'));
       }
     } else {
-      final cachedProduct = await productLacalDatasource.getCachedProducts();
-      if (cachedProduct.isNotEmpty) {
-        return Right(cachedProduct);
-      } else {
+      try {
+        final cachedProducts = await productLacalDatasource.getCachedProducts();
+        return Right(cachedProducts);
+      } on CacheExceptions {
         return const Left(CacheFailure('No cached products available'));
       }
     }
