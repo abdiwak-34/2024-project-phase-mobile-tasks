@@ -6,7 +6,7 @@
 import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:ecommerce_app/core/platform/network_info.dart' as _i7;
+import 'package:ecommerce_app/core/network/network_info.dart' as _i7;
 import 'package:ecommerce_app/features/product/data/datasources/local/product_lacal_datasource.dart'
     as _i6;
 import 'package:ecommerce_app/features/product/data/datasources/remote/product_remote_datasources.dart'
