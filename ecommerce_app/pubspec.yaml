@@ -41,6 +41,7 @@ dependencies:
   test: ^1.25.15
   connectivity: ^3.0.6
   data_connection_checker_nulls: ^0.0.2
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:

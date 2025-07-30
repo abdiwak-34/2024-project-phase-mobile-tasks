@@ -84,7 +84,7 @@ class ProductRepositoryImpl implements ProductRepository{
       }
     } else {
       try {
-        final cachedProducts = await productLacalDatasource.getCachedProducts();
+        final cachedProducts = await productLacalDatasource.getProducts();
         return Right(cachedProducts);
       } on CacheExceptions {
         return const Left(CacheFailure('No cached products available'));
@@ -94,17 +94,16 @@ class ProductRepositoryImpl implements ProductRepository{
 
   @override
   Future<Either<Failure, Product>> getProductById(String id) async {
-    
-    if (await networkInfo.isConnected) {
+    try {
+      if (await networkInfo.isConnected) {
       final remoteProduct = await productRemoteDatasource.getProductById(id);
       return Right(remoteProduct);
-    } else {
-      try {
-        final cachedProduct = await productLacalDatasource.getCachedProductById(id);
-        return Right(cachedProduct);
-      } catch (e) {
-        return Left(CacheFailure('No cached product found with id: $id'));
-      }
     }
+    } on NetworkException {
+      final cachedProducts = await productLacalDatasource.getProduct(id);
+      return Right(cachedProducts);
+    }
+    
+    return const Left(CacheFailure('No cached product available'));
   }
 }

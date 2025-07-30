@@ -17,6 +17,7 @@ import 'product_repositories_impl_test.mocks.dart';
   NetworkInfo,
 ])
 
+
 void main() {
   late MockProductRemoteDatasources mockRemoteDatasource;
   late MockProductLacalDatasource mockLocalDatasource;
