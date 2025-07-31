@@ -12,15 +12,13 @@ import 'product_local_datasources_test.mocks.dart';
 @GenerateMocks([SharedPreferences])
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+
   late ProductLacalDatasourceImpl dataSource;
   late MockSharedPreferences mockSharedPreferences;
   late List<ProductModel> testProducts;
-  final testProductsJson = '[{"id":"1","name":"Product 1","price":10.0,"description":"Description 1","imageUrl":"http://example.com/image1.jpg"},{"id":"2","name":"Product 2","price":20.0,"description":"Description 2","imageUrl":"http://example.com/image2.jpg"}]';
+  final testProductsJson = ['{"id":"1","name":"Product 1","price":10.0,"description":"Description 1","imageUrl":"http://example.com/image1.jpg"}','{"id":"2","name":"Product 2","price":20.0,"description":"Description 2","imageUrl":"http://example.com/image2.jpg"}'];
 
   const CACHED_PRODUCTS = 'CACHED_PRODUCTS';
-
-  TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
@@ -59,16 +57,17 @@ void main() {
     verify(mockSharedPreferences.setString(CACHED_PRODUCTS, expectedJson)).called(1);
   });
 
-  test('should return list of products from local cache', () async {
-    // Arrange
 
-    when(mockSharedPreferences.getString(CACHED_PRODUCTS))
-        .thenReturn(testProductsJson);
+  test('should return list of ProductModel when there is cached data', () async {
+      // Arrange
+      when(mockSharedPreferences.getStringList(CACHED_PRODUCTS))
+          .thenReturn(testProductsJson);
 
-    // Act
-    final result = await dataSource.getProducts();
+      // Act
+      final result = await dataSource.getProducts();
 
-    // Assert
-    expect(result, equals(testProducts));
-  });
+      // Assert
+      expect(result, equals(testProducts));
+    });
+
 }

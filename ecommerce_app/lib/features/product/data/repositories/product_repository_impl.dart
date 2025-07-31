@@ -21,40 +21,34 @@ class ProductRepositoryImpl implements ProductRepository{
 
   @override
   Future<Either<Failure, Product>> createProduct(Product product) async {
-    try {
-      // Check network (throws NetworkException if offline)
-      if (!await networkInfo.isConnected) {
-        return const Left(NetworkFailure('No internet connection'));
-      }
 
-      try {
-        final remoteProduct = await productRemoteDatasource.createProduct(product);
-        return Right(remoteProduct);
-      } on ServerExceptions {
-        return const Left(ServerFailure('server error'));
-      }
-    } on NetworkException {
+    if (!await networkInfo.isConnected) {
       return const Left(NetworkFailure('No internet connection'));
     }
+
+    try {
+      final remoteProduct = await productRemoteDatasource.createProduct(product);
+      return Right(remoteProduct);
+    } on ServerExceptions {
+      return const Left(ServerFailure('server error'));
+
+   }
   }
 
   @override
   Future<Either<Failure, Product>> updateProduct(Product product) async {
-    try {
-      // Check network (throws NetworkException if offline)
-      if (!await networkInfo.isConnected) {
-        return const Left(NetworkFailure('No internet connection'));
-      }
 
-      try {
-        final remoteProduct = await productRemoteDatasource.updateProduct(product);
-        return Right(remoteProduct);
-      } on ServerExceptions {
-        return const Left(ServerFailure('server error'));
-      }
-    } on NetworkException {
+    if (!await networkInfo.isConnected) {
       return const Left(NetworkFailure('No internet connection'));
     }
+
+    try {
+      final remoteProduct = await productRemoteDatasource.updateProduct(product);
+      return Right(remoteProduct);
+    } on ServerExceptions {
+      return const Left(ServerFailure('server error'));
+    }
+
   }
 
   @override
@@ -66,7 +60,7 @@ class ProductRepositoryImpl implements ProductRepository{
     try {
       await productRemoteDatasource.deleteProduct(id);
       return const Right(unit);
-    } on ServerException {
+    } on ServerExceptions {
       return const Left(ServerFailure('Server error'));
     }
   }
@@ -93,16 +87,21 @@ class ProductRepositoryImpl implements ProductRepository{
 
   @override
   Future<Either<Failure, Product>> getProductById(String id) async {
-    try {
-      if (await networkInfo.isConnected) {
-      final remoteProduct = await productRemoteDatasource.getProductById(id);
-      return Right(remoteProduct);
+
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteProduct = await productRemoteDatasource.getProductById(id);
+        return Right(remoteProduct);
+      } on ServerExceptions {
+        return const Left(ServerFailure('server error'));
+      }
+    } else {
+      try {
+        final cachedProduct = await productLacalDatasource.getProduct(id);
+        return Right(cachedProduct);
+      } on CacheExceptions {
+        return const Left(CacheFailure('No cached product available'));
+      }
     }
-    } on NetworkException {
-      final cachedProducts = await productLacalDatasource.getProduct(id);
-      return Right(cachedProducts);
-    }
-    
-    return const Left(CacheFailure('No cached product available'));
-  }
+}
 }
