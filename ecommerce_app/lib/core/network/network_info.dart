@@ -15,7 +15,7 @@ class NetworkInfoImpl implements NetworkInfo {
   Future<bool> get isConnected async {
     final isConnected = await dataConnectionChecker.hasConnection;
     if (!isConnected) {
-      throw  NetworkException();
+      return false;
     }
     return isConnected;
   }

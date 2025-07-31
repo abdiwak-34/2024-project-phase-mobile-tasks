@@ -59,16 +59,15 @@ class ProductRepositoryImpl implements ProductRepository{
 
   @override
   Future<Either<Failure, Unit>> deleteProduct(String id) async {
-    try {
-      await networkInfo.isConnected;
-      try {
-        await productRemoteDatasource.deleteProduct(id);
-        return const Right(unit);
-      } on ServerExceptions {
-        return const Left(ServerFailure('server error'));
-      }
-    } on NetworkException {
+    if (!await networkInfo.isConnected) {
       return const Left(NetworkFailure('No internet connection'));
+    }
+
+    try {
+      await productRemoteDatasource.deleteProduct(id);
+      return const Right(unit);
+    } on ServerException {
+      return const Left(ServerFailure('Server error'));
     }
   }
 

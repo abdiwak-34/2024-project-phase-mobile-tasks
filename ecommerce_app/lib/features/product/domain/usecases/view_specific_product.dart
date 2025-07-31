@@ -11,7 +11,7 @@ class ViewProductUsecase implements UseCase<Product, String> {
   ViewProductUsecase(this.productRepository);
 
   @override
-  Future<Either<Failure, Product>> call(String id) {
-    return productRepository.getProductById(id);
+  Future<Either<Failure, Product>> call(String id) async{
+    return await productRepository.getProductById(id);
   }
 }

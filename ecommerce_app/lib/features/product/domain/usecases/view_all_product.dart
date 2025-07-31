@@ -11,7 +11,7 @@ class ViewAllProductsUsecase implements UseCase<List<Product>, NoParams> {
   ViewAllProductsUsecase(this.productRepository);
   
   @override
-  Future<Either<Failure, List<Product>>> call(NoParams params) {
-    return productRepository.getAllProducts();
+  Future<Either<Failure, List<Product>>> call(NoParams params) async {
+    return await productRepository.getAllProducts();
   }
 }
