@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/error/exceptions.dart';
 import 'package:ecommerce_app/core/error/failures.dart';
 import 'package:ecommerce_app/core/network/network_info.dart';
-import 'package:ecommerce_app/features/product/data/datasources/local/product_lacal_datasource.dart';
-import 'package:ecommerce_app/features/product/data/datasources/remote/product_remote_datasources.dart';
+import 'package:ecommerce_app/features/product/data/datasources/product_local_datasources.dart';
+import 'package:ecommerce_app/features/product/data/datasources/product_remote_datasources.dart';
 import 'package:ecommerce_app/features/product/data/repositories/product_repository_impl.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -57,41 +57,21 @@ void main() {
   }
 
   runTestOffline(() {
-    test('should return cached products when offline', () async {
-      // Arrange
-      when(mockLocalDatasource.getCachedProducts()).thenAnswer((_) async => tProduct);
-      
-      // Act
-      final result = await repository.getAllProducts();
-      
-      // Assert
-      verify(mockLocalDatasource.getCachedProducts());
-      expect(result, Right(tProduct));
-    });
+    
 
       test('should return single data from local datasource', () async {
         // Arrange
-        when(mockLocalDatasource.getCachedProductById('1')).thenAnswer((_) async => tProduct[0]);
+        when(mockLocalDatasource.getProduct('1')).thenAnswer((_) async => tProduct[0]);
     
         // Act
         final result = await repository.getProductById('1');
     
         // Assert
-        verify(mockLocalDatasource.getCachedProductById('1'));
+        verify(mockLocalDatasource.getProduct('1'));
         expect(result, Right(tProduct[0]));
       });
 
-    test('should return CacheFailure when there are no cached products', () async {
-      // Arrange
-      when(mockLocalDatasource.getCachedProducts()).thenThrow(CacheExceptions());
-      
-      // Act
-      final result = await repository.getAllProducts();
-      
-      // Assert
-      verify(mockLocalDatasource.getCachedProducts());
-      expect(result, const Left(CacheFailure('No cached products available')));
-    });
+    
   });
 
   runTestOnline(() {

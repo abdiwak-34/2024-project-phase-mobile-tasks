@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/error/failures.dart';
-import '../../../domain/entities/product.dart';
-import '../../models/product_model.dart';
+import '../../domain/entities/product.dart';
+import '../models/product_model.dart';
 
 abstract class ProductLacalDatasource {
   Future<List<Product>> getProducts();

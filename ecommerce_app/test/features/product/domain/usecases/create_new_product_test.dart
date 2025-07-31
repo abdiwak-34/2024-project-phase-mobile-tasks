@@ -10,7 +10,9 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../helpers/test_helper.mocks.dart';
 
-@GenerateMocks([ProductRepository])
+
+class MockProductRepository extends Mock implements ProductRepository{}
+
 void main() {
   late CreateProductUsecase createProductUsecase;
   late MockProductRepository mockRepository;

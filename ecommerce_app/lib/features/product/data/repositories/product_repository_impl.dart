@@ -5,8 +5,8 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/repositories/product_repository.dart';
-import '../datasources/local/product_lacal_datasource.dart';
-import '../datasources/remote/product_remote_datasources.dart';
+import '../datasources/product_local_datasources.dart';
+import '../datasources/product_remote_datasources.dart';
 
 class ProductRepositoryImpl implements ProductRepository{
   final ProductLacalDatasource productLacalDatasource;

@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../helpers/test_helper.mocks.dart';
 
-@GenerateMocks([ProductRepository])
+
 void main() {
   late DeleteProductUsecase deleteProductUsecase;
   late MockProductRepository mockRepository;
