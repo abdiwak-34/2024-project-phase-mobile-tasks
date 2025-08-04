@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'product_dependency_injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Required for async pre-init
+  await di.init();
   runApp(const MyApp());
 }
 
