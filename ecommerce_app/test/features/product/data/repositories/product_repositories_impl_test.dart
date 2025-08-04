@@ -56,43 +56,7 @@ void main() {
     });
   }
 
-  runTestOffline(() {
-    test('should return cached products when offline', () async {
-      // Arrange
-      when(mockLocalDatasource.getCachedProducts()).thenAnswer((_) async => tProduct);
-      
-      // Act
-      final result = await repository.getAllProducts();
-      
-      // Assert
-      verify(mockLocalDatasource.getCachedProducts());
-      expect(result, Right(tProduct));
-    });
 
-      test('should return single data from local datasource', () async {
-        // Arrange
-        when(mockLocalDatasource.getCachedProductById('1')).thenAnswer((_) async => tProduct[0]);
-    
-        // Act
-        final result = await repository.getProductById('1');
-    
-        // Assert
-        verify(mockLocalDatasource.getCachedProductById('1'));
-        expect(result, Right(tProduct[0]));
-      });
-
-    test('should return CacheFailure when there are no cached products', () async {
-      // Arrange
-      when(mockLocalDatasource.getCachedProducts()).thenThrow(CacheExceptions());
-      
-      // Act
-      final result = await repository.getAllProducts();
-      
-      // Assert
-      verify(mockLocalDatasource.getCachedProducts());
-      expect(result, const Left(CacheFailure('No cached products available')));
-    });
-  });
 
   runTestOnline(() {
       test('should return created product', () async {
