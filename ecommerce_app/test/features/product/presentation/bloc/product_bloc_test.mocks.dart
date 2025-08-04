@@ -70,15 +70,13 @@ class MockCreateProductUsecase extends _i1.Mock
           as _i2.ProductRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.Product>> execute(
-    _i7.Product? product,
-  ) =>
+  _i5.Future<_i3.Either<_i6.Failure, _i7.Product>> call(_i7.Product? product) =>
       (super.noSuchMethod(
-            Invocation.method(#execute, [product]),
+            Invocation.method(#call, [product]),
             returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Product>>.value(
               _FakeEither_1<_i6.Failure, _i7.Product>(
                 this,
-                Invocation.method(#execute, [product]),
+                Invocation.method(#call, [product]),
               ),
             ),
           )
@@ -106,15 +104,13 @@ class MockUpdateProductUsecase extends _i1.Mock
           as _i2.ProductRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.Product>> execute(
-    _i7.Product? params,
-  ) =>
+  _i5.Future<_i3.Either<_i6.Failure, _i7.Product>> call(_i7.Product? params) =>
       (super.noSuchMethod(
-            Invocation.method(#execute, [params]),
+            Invocation.method(#call, [params]),
             returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Product>>.value(
               _FakeEither_1<_i6.Failure, _i7.Product>(
                 this,
-                Invocation.method(#execute, [params]),
+                Invocation.method(#call, [params]),
               ),
             ),
           )
@@ -142,15 +138,15 @@ class MockDeleteProductUsecase extends _i1.Mock
           as _i2.ProductRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> execute(
+  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call(
     _i10.DeleteProductParams? params,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#execute, [params]),
+            Invocation.method(#call, [params]),
             returnValue: _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>.value(
               _FakeEither_1<_i6.Failure, _i3.Unit>(
                 this,
-                Invocation.method(#execute, [params]),
+                Invocation.method(#call, [params]),
               ),
             ),
           )
@@ -178,16 +174,16 @@ class MockViewAllProductsUsecase extends _i1.Mock
           as _i2.ProductRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Product>>> execute(
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Product>>> call(
     _i10.NoParams? params,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#execute, [params]),
+            Invocation.method(#call, [params]),
             returnValue:
                 _i5.Future<_i3.Either<_i6.Failure, List<_i7.Product>>>.value(
                   _FakeEither_1<_i6.Failure, List<_i7.Product>>(
                     this,
-                    Invocation.method(#execute, [params]),
+                    Invocation.method(#call, [params]),
                   ),
                 ),
           )
@@ -215,13 +211,13 @@ class MockViewProductUsecase extends _i1.Mock
           as _i2.ProductRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.Product>> execute(String? id) =>
+  _i5.Future<_i3.Either<_i6.Failure, _i7.Product>> call(String? id) =>
       (super.noSuchMethod(
-            Invocation.method(#execute, [id]),
+            Invocation.method(#call, [id]),
             returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Product>>.value(
               _FakeEither_1<_i6.Failure, _i7.Product>(
                 this,
-                Invocation.method(#execute, [id]),
+                Invocation.method(#call, [id]),
               ),
             ),
           )
